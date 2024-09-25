@@ -234,7 +234,7 @@ def stock_price_prediction(ticker, lookback_period, lookahead_days, target_curre
 
 # Streamlit App
 def main():
-    st.title("Stock Sage")
+    st.title("Stock Sage Predictor")
     
     # User input
     ticker = st.selectbox('Select Ticker:', update_ticker_list(), index=0)
