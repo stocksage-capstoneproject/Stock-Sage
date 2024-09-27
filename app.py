@@ -5,7 +5,6 @@ from sklearn.linear_model import LinearRegression
 from sklearn.model_selection import train_test_split
 import numpy as np
 import yfinance as yf
-import streamlit.components.v1 as components
 
 # Static exchange rates (update these as needed)
 STATIC_EXCHANGE_RATES = {
@@ -54,16 +53,26 @@ STATIC_EXCHANGE_RATES = {
     'TND': 3.05,  # Tunisian Dinar
 }
 
-# Example list of popular tickers (including some Indian company tickers)
+# Extended list of popular tickers
 POPULAR_TICKERS = [
     # Global
     'AAPL', 'MSFT', 'GOOGL', 'AMZN', 'TSLA', 'META', 'NVDA', 'BRK-B', 'JPM', 'V',
     'MA', 'WMT', 'DIS', 'HD', 'KO', 'PFE', 'MRK', 'BA', 'C', 'CSCO', 'NKE', 'UNH',
     'INTC', 'T', 'ORCL', 'IBM', 'ADBE', 'CVX', 'XOM', 'MCD', 'PEP', 'ABT', 'NFLX',
+    'CRM', 'TXN', 'QCOM', 'AVGO', 'AMD', 'INTU', 'NVS', 'SBUX', 'MDLZ', 'NEE',
+    'TGT', 'CAT', 'HON', 'LMT', 'AMGN', 'GILD', 'SYK', 'AXP', 'LRCX', 'DHR',
+    'MMM', 'COP', 'PM', 'HUM', 'SPGI', 'COST', 'AMAT', 'ATVI', 'ADSK', 'BMY',
+    'FISV', 'KMB', 'VRTX', 'WBA', 'TROW',
     
     # Indian Companies
-    'TATAMOTORS.BO', 'RELIANCE.BO', 'HDFCBANK.BO', 'INFY.BO', 'HDFC.BO', 'HDFC.NS', 'ICICIBANK.BO',
-    'LT.BO', 'SBIN.BO', 'HINDUNILVR.BO', 'ITC.BO', 'KOTAKBANK.BO', 'BHARTIARTL.BO'
+    'TATAMOTORS.BO', 'RELIANCE.BO', 'HDFCBANK.BO', 'INFY.BO', 'HDFC.BO', 'HDFC.NS',
+    'ICICIBANK.BO', 'LT.BO', 'SBIN.BO', 'HINDUNILVR.BO', 'ITC.BO', 'KOTAKBANK.BO',
+    'BHARTIARTL.BO', 'TCS.BO', 'BAJFINANCE.BO', 'MINDTREE.BO', 'TECHM.BO', 'TATAPOWER.BO',
+    'SUNPHARMA.BO', 'LTTS.BO', 'NTPC.BO', 'JSWSTEEL.BO', 'ADANIGREEN.BO', 'ADANIPORTS.BO',
+    'MARUTI.BO', 'HINDALCO.BO', 'WIPRO.BO', 'CIPLA.BO', 'NESTLEIND.BO', 'DRREDDY.BO',
+    'ONGC.BO', 'ULTRACEMCO.BO', 'SHREECEM.BO', 'HCLTECH.BO', 'INDUSINDBK.BO', 'EICHERMOT.BO',
+    'BHARTIARTL.NS', 'ICICIBANK.NS', 'HDFCBANK.NS', 'HDFC.NS', 'TCS.NS', 'RELIANCE.NS',
+    'INFY.NS', 'SBIN.NS', 'ITC.NS', 'TATAMOTORS.NS', 'MINDTREE.NS', 'LT.NS', 'TATAPOWER.NS'
 ]
 
 @st.cache_data(ttl=3600)
@@ -258,29 +267,6 @@ def main():
             st.write(f"Conversion Rate: {conversion_rate}")
             st.write(f"Advice: {advice}")
             st.dataframe(result)
-
-    # Embed the Dialogflow chatbot using components.html with fixed positioning
-    components.html(
-        """
-        <style>
-          #chatbot-container {
-            position: fixed;
-            bottom: 20px;  /* Fixed 20px from the bottom */
-            right: 20px;   /* Fixed 20px from the right edge */
-            z-index: 1000; /* Ensure it's on top of other content */
-          }
-        </style>
-        <div id="chatbot-container">
-          <script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
-          <df-messenger
-            chat-title="Stocksage_chatbot"
-            agent-id="9cdbe2fd-eceb-481c-bd1a-4d2d8a2e9dc2"
-            language-code="en">
-          </df-messenger>
-        </div>
-        """,
-        height=600
-    )
 
 if __name__ == "__main__":
     main()
